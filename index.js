@@ -1,7 +1,7 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 
-const repoOwner = cprocess.env.REPO_OWNER;
+const repoOwner = process.env.REPO_OWNER;
 const repoName = process.env.REPO_NAME;
 const prNumber = process.env.PR_NUMBER;
 const checkNames = process.env.CHECK_NAMES;
