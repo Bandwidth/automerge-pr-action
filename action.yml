@@ -15,5 +15,14 @@ inputs:
     required: false
     description: Checks to Await Before Auto-Merging
 runs:
-  using: 'node16'
-  main: index.js
+  using: composite
+  steps:
+
+    - name: Setup Node
+      uses: actions/setup-node@v2
+      with:
+        node-version: 16
+    - name: Install and Run Script
+      run: |
+        npm install && npm run start
+      shell: bash

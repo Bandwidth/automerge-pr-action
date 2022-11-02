@@ -4,6 +4,7 @@
   "description": "Automerge Docsite PRs",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "test"
   },
   "repository": {
