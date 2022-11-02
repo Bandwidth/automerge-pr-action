@@ -14,6 +14,10 @@ inputs:
   checkNames:
     required: false
     description: Checks to Await Before Auto-Merging
+  token:
+    required: false
+    description: Github Token
+    default: ${{ env.GITHUB_TOKEN }}
 runs:
   using: composite
   steps:
