@@ -1,0 +1,19 @@
+name: Auto Merge
+description: Auto Merges an open PR given a Branch Name
+inputs:
+  repoOwner:
+    required: false
+    description: Pull Request Number
+    default: bandwidth
+  repoName:
+    required: true
+    description: Pull Request Number
+  prNumber:
+    required: true
+    description: Pull Request Number
+  checkNames:
+    required: false
+    description: Checks to Await Before Auto-Merging
+runs:
+  using: 'node16'
+  main: index.js
