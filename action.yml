@@ -29,4 +29,7 @@ runs:
       run: |
         cd ${{ github.action_path }}
         npm install && npm run start
+      env:
+        token: ${{ inputs.token }}
       shell: bash
+

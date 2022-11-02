@@ -5,8 +5,9 @@ const repoOwner = core.getInput('repoOwner');
 const repoName = core.getInput('repoName');
 const prNumber = core.getInput('prNumber');
 const checkNames = core.getMultilineInput('checkNames');
+const token = process.env.TOKEN;
 
-const octokit = github.getOctokit(core.getInput('token'));
+const octokit = github.getOctokit(token);
 
 async function main() {
     //TODO: Check for checks test status
