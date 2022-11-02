@@ -15,9 +15,8 @@ inputs:
     required: false
     description: Checks to Await Before Auto-Merging
   token:
-    required: false
+    required: true
     description: Github Token
-    default: ${{ env.GITHUB_TOKEN }}
 runs:
   using: composite
   steps:
