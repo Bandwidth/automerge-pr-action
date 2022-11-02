@@ -30,6 +30,6 @@ runs:
         cd ${{ github.action_path }}
         npm install && npm run start
       env:
-        token: ${{ inputs.token }}
+        TOKEN: ${{ inputs.token }}
       shell: bash
 
