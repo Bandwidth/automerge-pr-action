@@ -24,6 +24,6 @@ runs:
 
     - name: Install and Run Script
       run: |
-        ls -la
+        cd ${{ github.action_path }}
         npm install && npm run start
       shell: bash
