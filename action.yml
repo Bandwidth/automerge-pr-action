@@ -30,6 +30,10 @@ runs:
         cd ${{ github.action_path }}
         npm install && npm run start
       env:
+        REPO_OWNER: ${{ inputs.repoOwner }}
+        REPO_NAME: ${{ inputs.repoName }}
+        PR_NUMBER: ${{ inputs.prNumber }}
+        CHECK_NAMES: ${{ inputs.checkNames }}
         TOKEN: ${{ inputs.token }}
       shell: bash
 

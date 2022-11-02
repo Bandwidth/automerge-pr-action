@@ -1,10 +1,10 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 
-const repoOwner = core.getInput('repoOwner');
-const repoName = core.getInput('repoName');
-const prNumber = core.getInput('prNumber');
-const checkNames = core.getMultilineInput('checkNames');
+const repoOwner = cprocess.env.REPO_OWNER;
+const repoName = process.env.REPO_NAME;
+const prNumber = process.env.PR_NUMBER;
+const checkNames = process.env.CHECK_NAMES;
 const token = process.env.TOKEN;
 
 const octokit = github.getOctokit(token);
