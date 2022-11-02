@@ -21,6 +21,7 @@ async function main() {
     // Checks for merge conflicts
     if (pullRequest.mergeable != true){
         core.setFailed('Merge Conflicts Present. Cant Auto-Merge PR.');
+        process.exit(1);
     }
 
     // Poll for checks status
