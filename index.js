@@ -57,6 +57,7 @@ async function pollForChecks(requiredChecks) {
           setTimeout(resolve, delayBetweenRequests * 2000)
         );
       } else {
+        currentTry = 0;
         checksStatus.push({
           checkId: checkId,
           name: requiredChecks[check].context,
@@ -85,6 +86,7 @@ async function pollForChecks(requiredChecks) {
         check_run_id: checksStatus[check].checkId,
       });
       if (run.data.status == "completed") {
+        currentTry = 0;
         checksStatus[check].result = {
           status: run.data.status,
           conclusion: run.data.conclusion,
@@ -96,13 +98,6 @@ async function pollForChecks(requiredChecks) {
         setTimeout(resolve, delayBetweenRequests * 1000)
       );
     }
-  }
-
-  if (requiredChecks.length != checksStatus.length) {
-    core.setFailed(
-      "Timed out waiting for required checks to complete. Cant Auto-Merge PR."
-    );
-    process.exit(1);
   }
 
   return checksStatus;
