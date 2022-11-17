@@ -75,7 +75,8 @@ async function pollForChecks(requiredChecks) {
   }
 
   // Poll for completed status on all of the required checks
-  currentTry = 0; // reset currentTry since we need to poll again for completion
+  // Resets currentTry since we need to poll again for completion
+  currentTry = 0;
   for (check in checksStatus) {
     while (currentTry <= maxRetries) {
       run = await octokit.rest.checks.get({
@@ -108,7 +109,7 @@ async function pollForChecks(requiredChecks) {
 }
 
 /**
- * main Contains all of the logic to gather required PR check information, poll for complete + successful status
+ * main contains all of the logic to gather required PR check information, poll for complete + successful status
  * and then merge a PR contingent on required checks completing successfully.
  */
 async function main() {
