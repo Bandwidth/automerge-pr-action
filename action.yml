@@ -11,9 +11,6 @@ inputs:
   prNumber:
     required: true
     description: Pull Request Number
-  checkNames:
-    required: false
-    description: Checks to Await Before Auto-Merging
   token:
     required: true
     description: Github Token
