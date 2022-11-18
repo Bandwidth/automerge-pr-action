@@ -5,8 +5,8 @@ const repoOwner = process.env.REPO_OWNER;
 const repoName = process.env.REPO_NAME;
 const prNumber = process.env.PR_NUMBER;
 const token = process.env.TOKEN;
-const maxRetries = process.env.MAX_RETRIES;
-const delayBetweenRequests = process.env.DELAY_BETWEEN_REQUESTS;
+const maxRetries = Number(process.env.MAX_RETRIES);
+const retryDelay = Number(process.env.RETRY_DELAY);
 
 const octokit = github.getOctokit(token);
 
@@ -54,7 +54,7 @@ async function pollForChecks(requiredChecks) {
       if (checkId == null) {
         currentTry += 1;
         await new Promise((resolve) =>
-          setTimeout(resolve, delayBetweenRequests * 2000)
+          setTimeout(resolve, retryDelay * 1000) // Convert ms to seconds
         );
       } else {
         currentTry = 0;
@@ -69,6 +69,8 @@ async function pollForChecks(requiredChecks) {
   }
 
   if (requiredChecks.length != checksStatus.length) {
+    console.log(requiredChecks.length)
+    console.log(checksStatus.length)
     core.setFailed(
       "Timed out waiting for required checks to complete. Cant Auto-Merge PR."
     );
@@ -95,7 +97,7 @@ async function pollForChecks(requiredChecks) {
       }
       currentTry += 1;
       await new Promise((resolve) =>
-        setTimeout(resolve, delayBetweenRequests * 1000)
+        setTimeout(resolve, retryDelay * 1000) // Convert ms to seconds
       );
     }
   }

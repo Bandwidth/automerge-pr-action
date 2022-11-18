@@ -14,6 +14,14 @@ inputs:
   token:
     required: true
     description: Github Token
+  maxRetries:
+    required: false
+    description: Amount of times to retry polling for status checks
+    default: '10'
+  retryDelay:
+    required: false
+    description: Time to sleep in between retry attempts (in seconds)
+    default: '60'
 runs:
   using: composite
   steps:
@@ -32,5 +40,7 @@ runs:
         PR_NUMBER: ${{ inputs.prNumber }}
         CHECK_NAMES: ${{ inputs.checkNames }}
         TOKEN: ${{ inputs.token }}
+        MAX_RETRIES: ${{ inputs.maxRetries }}
+        RETRY_DELAY: ${{ inputs.retryDelay }}
       shell: bash
 
