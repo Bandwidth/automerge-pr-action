@@ -1,1 +1,1 @@
-# automerge-docs-action
+# automerge-pr-action
