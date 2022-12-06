@@ -7,7 +7,7 @@ inputs:
     default: bandwidth
   repoName:
     required: true
-    description: Pull Request Number
+    description: Repository Name
   prNumber:
     required: true
     description: Pull Request Number
