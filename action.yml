@@ -3,7 +3,7 @@ description: Auto Merges an open PR given a Branch Name
 inputs:
   repoOwner:
     required: false
-    description: Pull Request Number
+    description: Repository Owner
     default: bandwidth
   repoName:
     required: true
