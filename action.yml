@@ -1,0 +1,46 @@
+name: Auto Merge
+description: Auto Merges an open PR given a Branch Name
+inputs:
+  repoOwner:
+    required: false
+    description: Repository Owner
+    default: bandwidth
+  repoName:
+    required: true
+    description: Repository Name
+  prNumber:
+    required: true
+    description: Pull Request Number
+  token:
+    required: true
+    description: Github Token
+  maxRetries:
+    required: false
+    description: Amount of times to retry polling for status checks
+    default: '10'
+  retryDelay:
+    required: false
+    description: Time to sleep in between retry attempts (in seconds)
+    default: '60'
+runs:
+  using: composite
+  steps:
+    - name: Setup Node
+      uses: actions/setup-node@v2
+      with:
+        node-version: 16
+
+    - name: Install and Run Script
+      run: |
+        cd ${{ github.action_path }}
+        npm install && npm run start
+      env:
+        REPO_OWNER: ${{ inputs.repoOwner }}
+        REPO_NAME: ${{ inputs.repoName }}
+        PR_NUMBER: ${{ inputs.prNumber }}
+        CHECK_NAMES: ${{ inputs.checkNames }}
+        TOKEN: ${{ inputs.token }}
+        MAX_RETRIES: ${{ inputs.maxRetries }}
+        RETRY_DELAY: ${{ inputs.retryDelay }}
+      shell: bash
+
