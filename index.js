@@ -53,8 +53,8 @@ async function pollForChecks(requiredChecks) {
       checkId = await getCheckRunId(requiredChecks[check].context);
       if (checkId == null) {
         currentTry += 1;
-        await new Promise((resolve) =>
-          setTimeout(resolve, retryDelay * 1000) // Convert ms to seconds
+        await new Promise(
+          (resolve) => setTimeout(resolve, retryDelay * 1000) // Convert ms to seconds
         );
       } else {
         currentTry = 0;
@@ -69,8 +69,6 @@ async function pollForChecks(requiredChecks) {
   }
 
   if (requiredChecks.length != checksStatus.length) {
-    console.log(requiredChecks.length)
-    console.log(checksStatus.length)
     core.setFailed(
       "Timed out waiting for required checks to complete. Cant Auto-Merge PR."
     );
@@ -96,8 +94,8 @@ async function pollForChecks(requiredChecks) {
         break;
       }
       currentTry += 1;
-      await new Promise((resolve) =>
-        setTimeout(resolve, retryDelay * 1000) // Convert ms to seconds
+      await new Promise(
+        (resolve) => setTimeout(resolve, retryDelay * 1000) // Convert ms to seconds
       );
     }
   }
@@ -131,7 +129,12 @@ async function main() {
   );
 
   requiredChecks = branch.protection.required_status_checks.checks;
-
+  // Remove the SDLC check from the list since it never shows up in the /check-runs API
+  for (check in requiredChecks) {
+    if ((requiredChecks[check].context = "github-sdlc-enforcer")) {
+      requiredChecks.splice(check, 1);
+    }
+  }
   if (requiredChecks.length) {
     global.commitId = pullRequest.head.sha;
     const checksStatusList = await pollForChecks(requiredChecks);
