@@ -129,12 +129,6 @@ async function main() {
   );
 
   requiredChecks = branch.protection.required_status_checks.checks;
-  // Remove the SDLC check from the list since it never shows up in the /check-runs API
-  for (check in requiredChecks) {
-    if ((requiredChecks[check].context = "github-sdlc-enforcer")) {
-      requiredChecks.splice(check, 1);
-    }
-  }
   if (requiredChecks.length) {
     global.commitId = pullRequest.head.sha;
     const checksStatusList = await pollForChecks(requiredChecks);
