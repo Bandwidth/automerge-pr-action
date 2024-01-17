@@ -131,7 +131,7 @@ async function main() {
   requiredChecks = branch.protection.required_status_checks.checks;
   // Remove the SDLC check from the list since it never shows up in the /check-runs API
   for (check in requiredChecks) {
-    if ((requiredChecks[check].context = "github-sdlc-enforcer")) {
+    if ((requiredChecks[check].context = "SDLC Enforcer")) {
       requiredChecks.splice(check, 1);
     }
   }
