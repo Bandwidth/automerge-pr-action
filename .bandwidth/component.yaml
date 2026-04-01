@@ -1,0 +1,14 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  schemaVersion: v1.0.0
+  name: automerge-pr-action
+  description: GitHub Action to automate merging pull requests as long as required checks have passed
+  annotations:
+    github.com/project-slug: Bandwidth/automerge-pr-action
+    organization: BW
+    costCenter: Development - Software Infra
+spec:
+  type: GitHub Action
+  owner: github/band-swi
+  lifecycle: Available
